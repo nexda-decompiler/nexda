@@ -7,6 +7,7 @@ Nexda is a versatile reverse engineering framework built in C++ and CMake. It is
 - **Binary Analysis**: Examine and dissect executable files to understand their structure and functionality.
 - **Hex Dump Generation**: Create hex representations of binary data for detailed inspection and analysis.
 - **Memory Analysis**: Monitor and analyze memory usage of running applications to identify performance bottlenecks and memory leaks.
+- **Disassembly**: Convert machine code to assembly code using our custom disassembler.
 
 ## Getting Started
 
