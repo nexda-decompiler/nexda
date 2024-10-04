@@ -1,3 +1,4 @@
+#include <cstdlib>
 #include <fstream>
 #include <iomanip>
 #include <iostream>
@@ -8,7 +9,6 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <vector>
-#include <cstdlib>
 
 struct MemoryRegion
 {
@@ -26,7 +26,8 @@ class ProcessMemoryAnalyzer
     pid_t pid;
     std::vector<MemoryRegion> regions;
 
-    void parseMemoryMap()
+    void
+    parseMemoryMap()
     {
         std::stringstream ss;
         ss << "/proc/" << pid << "/maps";
@@ -43,11 +44,14 @@ class ProcessMemoryAnalyzer
             MemoryRegion region;
             std::istringstream iss(line);
             std::string address_range;
-            iss >> address_range >> region.permissions >> std::hex >> region.offset;
+            iss >> address_range >> region.permissions >> std::hex >>
+                region.offset;
             iss.ignore(2); // Skip two fields (dev and inode)
-            std::getline(iss >> std::ws, region.path); // Read the rest of the line as path
+            std::getline(iss >> std::ws,
+                         region.path); // Read the rest of the line as path
 
-            sscanf(address_range.c_str(), "%lx-%lx", &region.start, &region.end);
+            sscanf(address_range.c_str(), "%lx-%lx", &region.start,
+                   &region.end);
             region.size = region.end - region.start;
 
             regions.push_back(region);
@@ -57,7 +61,8 @@ class ProcessMemoryAnalyzer
   public:
     ProcessMemoryAnalyzer(pid_t pid) : pid(pid) { parseMemoryMap(); }
 
-    size_t getTotalMemoryUsage() const
+    size_t
+    getTotalMemoryUsage() const
     {
         size_t total = 0;
         for (const auto &region : regions)
@@ -67,7 +72,8 @@ class ProcessMemoryAnalyzer
         return total;
     }
 
-    size_t getHeapSize() const
+    size_t
+    getHeapSize() const
     {
         for (const auto &region : regions)
         {
@@ -79,7 +85,8 @@ class ProcessMemoryAnalyzer
         return 0;
     }
 
-    size_t getStackSize() const
+    size_t
+    getStackSize() const
     {
         for (const auto &region : regions)
         {
@@ -91,7 +98,8 @@ class ProcessMemoryAnalyzer
         return 0;
     }
 
-    size_t getTextSegmentSize() const
+    size_t
+    getTextSegmentSize() const
     {
         for (const auto &region : regions)
         {
@@ -104,7 +112,8 @@ class ProcessMemoryAnalyzer
         return 0;
     }
 
-    size_t getDataSegmentSize() const
+    size_t
+    getDataSegmentSize() const
     {
         size_t total = 0;
         for (const auto &region : regions)
@@ -118,7 +127,8 @@ class ProcessMemoryAnalyzer
         return total;
     }
 
-    size_t getSharedLibrariesSize() const
+    size_t
+    getSharedLibrariesSize() const
     {
         size_t total = 0;
         for (const auto &region : regions)
@@ -131,7 +141,8 @@ class ProcessMemoryAnalyzer
         return total;
     }
 
-    size_t getAnonymousMemorySize() const
+    size_t
+    getAnonymousMemorySize() const
     {
         size_t total = 0;
         for (const auto &region : regions)
@@ -144,7 +155,8 @@ class ProcessMemoryAnalyzer
         return total;
     }
 
-    void printAnalysis() const
+    void
+    printAnalysis() const
     {
         std::cout << "Memory Analysis for PID: " << pid << std::endl;
         std::cout << "1. Total Memory Usage: " << getTotalMemoryUsage() / 1024
@@ -164,7 +176,8 @@ class ProcessMemoryAnalyzer
     }
 };
 
-pid_t getPIDFromExecutable(const std::string &executable)
+pid_t
+getPIDFromExecutable(const std::string &executable)
 {
     std::stringstream ss;
     ss << "pidof " << executable;
@@ -185,7 +198,8 @@ pid_t getPIDFromExecutable(const std::string &executable)
     return std::stoi(buffer);
 }
 
-int main(int argc, char *argv[])
+int
+main(int argc, char *argv[])
 {
     if (argc != 2)
     {
