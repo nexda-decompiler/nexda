@@ -1,0 +1,7 @@
+# Ignore builds
+/build
+/bin
+
+# Ignore Configs
+/.vscode
+/.idea
