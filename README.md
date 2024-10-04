@@ -13,11 +13,13 @@ Nexda is a versatile reverse engineering framework built in C++ and CMake. It is
 To get started with Nexda, clone the repository and build the project using CMake:
 
 ```bash
-git clone https://github.com/nexda-decompiler/nexda.git
-cd nexda
-mkdir build && cd build
-cmake ..
-make
+bash Setup.sh
+```
+
+Or if you're on MacOS:
+
+```bash
+bash Setup.command
 ```
 
 ## Usage
@@ -25,7 +27,6 @@ make
 After building the project, you can run Nexda tools using the command line, like the binary analyzer:
 
 ```bash
-cd bin
 ./nexda-binanalyze input.exe
 ```
 
