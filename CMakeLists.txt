@@ -24,15 +24,6 @@ foreach(SRC_FILE ${SRC_FILES})
   add_executable(${EXE_NAME} ${SRC_FILE})
   set_target_properties(${EXE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
   
-  # Link against the required libraries
-  target_link_libraries(${EXE_NAME} PRIVATE 
-    elf
-  )
-  
-  # Include directories for Capstone and Z3
-  target_include_directories(${EXE_NAME} PRIVATE 
-  )
-  
   install(TARGETS ${EXE_NAME} RUNTIME DESTINATION ${BIN_DIR})
 endforeach()
 
