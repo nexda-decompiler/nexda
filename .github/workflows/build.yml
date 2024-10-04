@@ -1,0 +1,32 @@
+name: CMake Build and Test
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v3
+
+    - name: Install dependencies
+      run: sudo apt-get install cmake build-essential
+
+    - name: Create build directory
+      run: mkdir build
+
+    - name: Configure CMake
+      run: cd build && cmake ..
+
+    - name: Build project
+      run: cd build && cmake --build .
+
+    - name: Run tests
+      run: cd build && ctest
