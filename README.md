@@ -37,7 +37,7 @@ Contributions are welcome! Please read the [CONTRIBUTING.md](CONTRIBUTING.md) fo
 
 ## License
 
-Nexda is licensed under the MIT License. See [LICENSE](LICENSE) for more details.
+Nexda is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for more details.
 
 ## Acknowledgments
 
