@@ -41,5 +41,8 @@ Nexda is licensed under the Apache 2.0 License. See [LICENSE](LICENSE) for more 
 
 ## Acknowledgments
 
+Here are some tributes to people for helping build this project:
+
 - CMake for the build system.
 - Contributors and users for their feedback and support.
+- [Design Mark Studio](https://bento.me/designmarkstudio) for the logo and branding.
