@@ -1,4 +1,4 @@
-![Nexda Logo](assets/SVG/Artboard%203.svg)
+![Nexda Logo](assets/SVG/Artboard%204.svg)
 
 # Nexda Reverse Engineering Framework
 
