@@ -19,11 +19,21 @@ add_custom_target(
   COMMAND ${CMAKE_COMMAND} -E remove_directory ${BIN_DIR}
 )
 
+# Find and link libelf and libcapstone
+find_package(PkgConfig REQUIRED)
+pkg_check_modules(ELF REQUIRED libelf)
+pkg_check_modules(CAPSTONE REQUIRED capstone)
+
+include_directories(${ELF_INCLUDE_DIRS} ${CAPSTONE_INCLUDE_DIRS})
+
 foreach(SRC_FILE ${SRC_FILES})
   get_filename_component(EXE_NAME ${SRC_FILE} NAME_WE)
   add_executable(${EXE_NAME} ${SRC_FILE})
+
+  target_link_libraries(${EXE_NAME} PRIVATE ${ELF_LIBRARIES} ${CAPSTONE_LIBRARIES})
+
   set_target_properties(${EXE_NAME} PROPERTIES RUNTIME_OUTPUT_DIRECTORY ${BIN_DIR})
-  
+
   install(TARGETS ${EXE_NAME} RUNTIME DESTINATION ${BIN_DIR})
 endforeach()
 
